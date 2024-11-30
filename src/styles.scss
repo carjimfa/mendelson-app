@@ -1,31 +1,28 @@
-@use "@angular/material" as mat;
+@use '@angular/material' as mat;
+@use "sass:map";
 
-@include mat.core();
+html {
+    @include mat.theme((
+        color: (
+            primary: mat.$rose-palette,
+            tertiary: mat.$red-palette,
+            theme-type: light,
+        ),
+        typography: Roboto,
+        density: 0
+    ));
 
-$my-app-primary: mat.m2-define-palette(mat.$m2-indigo-palette);
-$my-app-accent: mat.m2-define-palette(mat.$m2-pink-palette, A200, A100, A400);
-$my-app-warn: mat.m2-define-palette(mat.$m2-red-palette);
+    @include mat.sidenav-overrides((
+        container-width: 240px,
+        container-divider-color: rgba(map.get(mat.$red-palette, 30), 0.33)
+    ));
 
-$my-app-theme: mat.m2-define-light-theme(
-  (
-    color: (
-      primary: $my-app-primary,
-      accent: $my-app-accent,
-      warn: $my-app-warn,
-    ),
-  )
-);
-
+    @include mat.toolbar-overrides((
+        container-background-color: rgba(map.get(mat.$red-palette, 30), 0.33),
+    ));
+}
 // START Component styles
 // Sidenav style
-:root {
-    @include mat.sidenav-overrides((
-      container-width: 240px
-    ));
-  }
-
-@include mat.all-component-themes($my-app-theme);
-
 // END Component styles
 
 html,
@@ -41,4 +38,9 @@ body {
 
 .mat-drawer-container {
     min-height: 100vh;
+}
+
+.mat-drawer.mat-drawer-side.mat-drawer-opened {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
 }

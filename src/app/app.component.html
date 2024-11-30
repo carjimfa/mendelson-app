@@ -1,8 +1,9 @@
 <mat-drawer-container autosize>
   <mat-drawer mode="side" opened>
-    <p>Auto-resizing sidenav</p>
+    <app-sidebar></app-sidebar>
   </mat-drawer>
   <mat-drawer-content position="end">
+    <app-toolbar></app-toolbar>
     <main>
       <router-outlet />
     </main>
