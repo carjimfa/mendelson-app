@@ -1,7 +1,8 @@
-export class Song {
+export class SongMetadata {
     fileName: string;
     fileType: string;
     fileSize: number;
+    filePath: string;
     lastModified: number;
 
     album?: string;
@@ -13,7 +14,7 @@ export class Song {
     year?: number;
     genre?: Array<string>;
 
-    constructor(values: Partial<Song>) {
+    constructor(values: Partial<SongMetadata>) {
         Object.assign(this, values);
     }
 }

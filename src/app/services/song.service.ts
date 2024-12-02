@@ -1,16 +1,16 @@
 import { Injectable } from "@angular/core";
 import * as mm from 'music-metadata';
 import { from, map, Observable } from "rxjs";
-import { Song } from "../core/models/song";
+import { SongMetadata } from "../core/models/song.metadata";
 
 @Injectable({
     providedIn: 'root'
 })
 export class SongService {
-    analyze(file: File): Observable<Song> {
+    getMetadata(file: File): Observable<SongMetadata> {
         return from(mm.parseBlob(file))
             .pipe(
-                map((data) => new Song({
+                map((data) => new SongMetadata({
                     album: data.common.album,
                     albumArtist: data.common.albumartist,
                     artist: data.common.artist,

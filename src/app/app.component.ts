@@ -24,7 +24,7 @@ export class AppComponent {
   constructor(private readonly songService: SongService) {}
 
   analyze(file: File) {
-    this.songService.analyze(file).subscribe((song) => console.log(song));
+    this.songService.getMetadata(file).subscribe((song) => console.log(song));
   }
 
   onFileSelected(event: any): void {
