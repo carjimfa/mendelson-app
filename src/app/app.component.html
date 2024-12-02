@@ -5,6 +5,9 @@
   <mat-drawer-content position="end">
     <app-toolbar></app-toolbar>
     <main>
+      <div>
+        <input type="file" id="avatar" name="avatar" (change)="onFileSelected($event)" />
+      </div>
       <router-outlet />
     </main>
   </mat-drawer-content>

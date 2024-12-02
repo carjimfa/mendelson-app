@@ -1,0 +1,43 @@
+[
+    {
+        "fileName": "03 FromdaTomb$.mp3",
+        "fileType": "audio/mpeg",
+        "fileSize": 8605958,
+        "lastModified": 1733160450841,
+        "album": "1999",
+        "albumArtist": "Joey Bada$$",
+        "artist": "Joey Bada$$",
+        "artists": [
+            "Joey Bada$$"
+        ],
+        "title": "FromdaTomb$",
+        "track": {
+            "of": null,
+            "no": 3
+        },
+        "year": 2012,
+        "genre": [
+            "Hip Hop"
+        ]
+    },
+    {
+        "fileName": "04 Breezeblocks.m4a",
+        "fileType": "audio/x-m4a",
+        "fileSize": 7557804,
+        "lastModified": 1733160391831,
+        "album": "An Awesome Wave",
+        "artist": "alt-J",
+        "artists": [
+            "alt-J"
+        ],
+        "title": "Breezeblocks",
+        "track": {
+            "of": 13,
+            "no": 4
+        },
+        "year": 2012,
+        "genre": [
+            "Indie Rock"
+        ]
+    }
+]
