@@ -1,6 +1,8 @@
 # MendelsonApp
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.1. It also uses [Tauri](https://v2.tauri.app/) to build the desktop application.
+Mendelson is a new FOSS that wants to replace music apps dedicated to organize your local library music for an full open source entirely local approach. No cloud services are provided, no APIs, servers or music in someone else's computer. Your music, your culture, your take.
+
+We use [Angular](https://angular.dev/) for the frontend and [Tauri](https://v2.tauri.app/) for the backend.
 
 ## Get started
 
@@ -16,7 +18,7 @@ Now you need to install Tauri dependencies. For that you can check what's missin
 npx tauti info
 ```
 
-That will list all the dependencies missing. You can see an extended better-curated guide on the [Tauri website](https://v2.tauri.app/start/prerequisites/).
+That will list all the dependencies missing, probably rust and environment specific dependencies according to your OS. You can see an extended better-curated guide on the [Tauri website](https://v2.tauri.app/start/prerequisites/).
 
 ## Development server
 
