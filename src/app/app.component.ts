@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { ToolbarComponent } from './shared/components/toolbar/toolbar.component';
-import { SidebarComponent } from "./shared/components/sidebar/sidebar.component";
+import { ToolbarComponent } from './core/components/toolbar/toolbar.component';
+import { SidebarComponent } from "./core/components/sidebar/sidebar.component";
 import { SongService } from './services/song.service';
 
 @Component({
