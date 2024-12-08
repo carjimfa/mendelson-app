@@ -20,6 +20,12 @@ npx tauti info
 
 That will list all the dependencies missing, probably rust and environment specific dependencies according to your OS. You can see an extended better-curated guide on the [Tauri website](https://v2.tauri.app/start/prerequisites/).
 
+## Tauri plugins used:
+
+- [Dialog](https://v2.tauri.app/plugin/dialog/)
+- [FileSystem](https://v2.tauri.app/plugin/file-system/)
+- [SQL](https://v2.tauri.app/plugin/sql/)
+
 ## Development server
 
 To start a local development server with development config, just run:
@@ -29,6 +35,8 @@ npm run start
 ```
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+
+Many functionalities (open files, SQLite DB) are not present in the development server since they need Tauri to work. Currently there's a very simple mock service with factory in place but should be imroved.
 
 ## Build and run the app
 
