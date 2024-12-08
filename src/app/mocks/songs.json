@@ -1,5 +1,7 @@
 [
     {
+        "id": 1,
+        "timesPlayed": 23,
         "fileName": "03 FromdaTomb$.mp3",
         "fileType": "audio/mpeg",
         "fileSize": 8605958,
@@ -21,6 +23,8 @@
         ]
     },
     {
+        "id": 2,
+        "timesPlayed": 23,
         "fileName": "04 Breezeblocks.m4a",
         "fileType": "audio/x-m4a",
         "fileSize": 7557804,

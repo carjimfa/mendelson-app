@@ -7,7 +7,7 @@ import { SongMetadata } from "../core/models/song.metadata";
     providedIn: 'root'
 })
 export class SongService {
-    getMetadata(file: File): Observable<SongMetadata> {
+    getMetadataFromFile(file: File): Observable<SongMetadata> {
         return from(mm.parseBlob(file))
             .pipe(
                 map((data) => new SongMetadata({
@@ -29,5 +29,27 @@ export class SongService {
                     })
                 )
             );
-      }
+    }
+
+    getMetadataFromBuffer(filePath: string, file: Uint8Array): Observable<SongMetadata> {
+        return from(mm.parseBuffer(file))
+            .pipe(
+                map(
+                    (data) => new SongMetadata({
+                        album: data.common.album,
+                        albumArtist: data.common.albumartist,
+                        artist: data.common.artist,
+                        artists: data.common.artists,
+                        filePath,
+                        genre: data.common.genre,
+                        title: data.common.title,
+                        track: {
+                            of: data.common.track.of,
+                            no: data.common.track.no
+                        },
+                        year: data.common.year
+                    })
+                )
+            );
+    }
 }

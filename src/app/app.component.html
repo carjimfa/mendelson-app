@@ -6,7 +6,7 @@
     <app-toolbar></app-toolbar>
     <main>
       <div>
-        <input type="file" id="avatar" name="avatar" (change)="onFileSelected($event)" />
+        <button mat-button (click)="openFileSelectorDialog()">Open</button>
       </div>
       <router-outlet />
     </main>

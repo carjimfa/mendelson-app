@@ -13,6 +13,7 @@ export class SongMetadata {
     track?: Track;
     year?: number;
     genre?: Array<string>;
+    duration?: number;
 
     constructor(values: Partial<SongMetadata>) {
         Object.assign(this, values);
