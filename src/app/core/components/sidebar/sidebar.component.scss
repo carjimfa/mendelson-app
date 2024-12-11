@@ -1,6 +1,9 @@
 .sidebar {
     padding: 0 12px;
+
     .mat-toolbar {
-        background-color: transparent;        
+        background-color: transparent;
+        display: flex;
+        justify-content: space-between;
     }
 }

@@ -1,6 +1,15 @@
 <div class="sidebar">
     <mat-toolbar>
         <span>Mendelson</span>
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="openFileSelectorDialog(true)">
+              <mat-icon>folder_open</mat-icon>
+              <span>Import</span>
+            </button>
+          </mat-menu>
     </mat-toolbar>
     <mat-nav-list>
         <mat-list-item role="listitem" [routerLink]="appRoutes.Home">
@@ -8,15 +17,15 @@
             Home
         </mat-list-item>
         <div mat-subheader>Main</div>
-        <mat-list-item role="listitem">
+        <mat-list-item role="listitem" [routerLink]="appRoutes.RecentlyAdded">
             <mat-icon matListItemIcon>schedule</mat-icon>
             Recently added
         </mat-list-item>
-        <mat-list-item role="listitem">
+        <mat-list-item role="listitem" [routerLink]="appRoutes.Artists">
             <mat-icon matListItemIcon>mic_external_on</mat-icon>
             Artists
         </mat-list-item>
-        <mat-list-item role="listitem">
+        <mat-list-item role="listitem" [routerLink]="appRoutes.Albums">
             <mat-icon matListItemIcon>album</mat-icon>
             Albums
         </mat-list-item>

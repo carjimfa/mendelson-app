@@ -14,6 +14,7 @@
     "sql:allow-close",
     "dialog:default",
     "dialog:default",
-    "fs:default"
+    "fs:default",
+    "fs:allow-home-read-recursive"
   ]
 }
