@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AlbumsComponent } from './albums.component';
+import { ApiService } from '../../services/api.service';
+import { ApiMockService } from '../../mocks/api-mock.service';
 
 describe('AlbumsComponent', () => {
   let component: AlbumsComponent;
@@ -8,9 +10,15 @@ describe('AlbumsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AlbumsComponent]
+      imports: [AlbumsComponent],
+      providers: [
+        {
+          provide: ApiService,
+          useValue: new ApiMockService()
+        }
+      ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(AlbumsComponent);
     component = fixture.componentInstance;

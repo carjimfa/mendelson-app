@@ -86,6 +86,7 @@ export class SongService {
             );
     }
 
+    // TODO: Move to a file service where you pass only the fact that you want to select a song file type
     openFileSelectorDialog(multiple = false): void {
         const file$ = from(
             open({

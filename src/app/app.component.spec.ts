@@ -1,10 +1,29 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { ApiMockService } from './mocks/api-mock.service';
+import { ApiService } from './services/api.service';
+import { ActivatedRoute } from '@angular/router';
 
 describe('AppComponent', () => {
+  const fakeActivatedRoute = {
+    snapshot: { data: {} }
+  } as ActivatedRoute;
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AppComponent],
+      providers: [
+        provideAnimations(),
+        {
+          provide: ApiService,
+          useValue: new ApiMockService()
+        },
+        {
+          provide: ActivatedRoute,
+          useValue: fakeActivatedRoute
+        }
+      ]
     }).compileComponents();
   });
 
@@ -12,18 +31,5 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
-  });
-
-  it(`should have the 'mendelson-app' title`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('mendelson-app');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, mendelson-app');
   });
 });
