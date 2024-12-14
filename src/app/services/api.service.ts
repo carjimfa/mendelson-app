@@ -1,4 +1,4 @@
-import { from, mergeMap, Observable, take, tap } from "rxjs";
+import { from, map, mergeMap, Observable, take, tap } from "rxjs";
 import { Song } from "../core/models/song";
 import Database, { QueryResult } from "@tauri-apps/plugin-sql";
 import { Album } from "../core/models/album";
@@ -19,7 +19,28 @@ export class ApiService {
             take(1),
             mergeMap((db) => {
                 return from(db.select<Song[]>(queryBuilder.build()));
-            })
+            }),
+            map((songs) => songs.map((s) => new Song(s)))
+        );
+    }
+
+    songExists(song: Song): Observable<boolean> {
+        const db$ = from(Database.load("sqlite:test.db"));
+        const queryBuilder = new DbQueryBuilder();
+
+        queryBuilder
+            .select('songs', ['id'])
+            .where('title', 'LIKE', song.title)
+            .where('album', 'LIKE', song.album)
+            .where('albumArtist', 'LIKE', song.albumArtist)
+            .build();
+
+        return db$.pipe(
+            take(1),
+            mergeMap((db) => {
+                return from(db.select<Song[]>(queryBuilder.query));
+            }),
+            map((songs) => !!songs && songs.length > 0)
         );
     }
 
@@ -29,7 +50,25 @@ export class ApiService {
         const queryBuilder = new DbQueryBuilder();
         queryBuilder.insert(
             'songs',
-            ['addedOn', 'modifiedOn', 'timesPlayed', 'rating', 'isFavorite', 'title', 'year', 'album', 'albumArtist', 'filePath']
+            [
+                'filePath',
+                'addedOn',
+                'modifiedOn',
+                'timesPlayed',
+                'rating',
+                'isFavorite',
+                'album',
+                'albumArtist',
+                'artist',
+                'artists',
+                'title',
+                'trackOf',
+                'trackNo',
+                'year',
+                'genre',
+                'duration',
+                'codec'
+            ]
         );
 
         return db$.pipe(
@@ -38,7 +77,25 @@ export class ApiService {
                 return from(
                     db.execute(
                         queryBuilder.build(),
-                        [song.addedOn, song.modifiedOn, song.timesPlayed, song.rating, song.isFavorite, song.title, song.year, song.album, song.albumArtist, song.filePath]
+                        [
+                            song.filePath,
+                            song.addedOn,
+                            song.modifiedOn,
+                            song.timesPlayed,
+                            song.rating,
+                            song.isFavorite,
+                            song.album,
+                            song.albumArtist,
+                            song.artist,
+                            song.artists,
+                            song.title,
+                            song.trackOf,
+                            song.trackNo,
+                            song.year,
+                            song.genre,
+                            song.duration,
+                            song.codec
+                        ]
                     )
                 );
             })

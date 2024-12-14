@@ -26,4 +26,8 @@ export class ApiMockService implements ApiService {
     getAlbums(): Observable<Array<Album>> {
         return of();
     }
+
+    songExists(song: Song): Observable<boolean> {
+        return of();
+    }
 }

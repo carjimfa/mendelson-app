@@ -1,0 +1,96 @@
+{
+    "common": {
+        "track": {
+            "no": 3,
+            "of": null
+        },
+        "disk": {
+            "no": null,
+            "of": null
+        },
+        "movementIndex": {
+            "no": null,
+            "of": null
+        },
+        "title": "Emphasize",
+        "artists": [
+            "3KZ"
+        ],
+        "artist": "3KZ",
+        "albumartist": "3KZ",
+        "album": "Overmind [FIDES011]",
+        "comment": [
+            {
+                "text": "Visit https://3kzmusic.bandcamp.com"
+            }
+        ],
+        "year": 2020,
+        "date": "2020",
+        "encodedby": "Lavf58.45.100"
+    },
+    "format": {
+        "tagTypes": [
+            "iTunes"
+        ],
+        "trackInfo": [
+            {
+                "codecName": "ALAC",
+                "type": 2,
+                "audio": {
+                    "samplingFrequency": 44100,
+                    "bitDepth": 24,
+                    "channels": 2
+                }
+            }
+        ],
+        "container": "M4A/isom/iso2",
+        "creationTime": "1904-01-01T00:00:00.000Z",
+        "modificationTime": "2024-07-17T14:23:57.000Z",
+        "codec": "ALAC",
+        "duration": 393.3834693877551,
+        "sampleRate": 44100,
+        "bitsPerSample": 24,
+        "numberOfChannels": 2,
+        "lossless": true,
+        "bitrate": 1617657.6636288317
+    },
+    "native": {
+        "iTunes": [
+            {
+                "id": "©nam",
+                "value": "Emphasize"
+            },
+            {
+                "id": "©ART",
+                "value": "3KZ"
+            },
+            {
+                "id": "aART",
+                "value": "3KZ"
+            },
+            {
+                "id": "©alb",
+                "value": "Overmind [FIDES011]"
+            },
+            {
+                "id": "©cmt",
+                "value": "Visit https://3kzmusic.bandcamp.com"
+            },
+            {
+                "id": "©day",
+                "value": "2020"
+            },
+            {
+                "id": "trkn",
+                "value": "3/0"
+            },
+            {
+                "id": "©too",
+                "value": "Lavf58.45.100"
+            }
+        ]
+    },
+    "quality": {
+        "warnings": []
+    }
+}

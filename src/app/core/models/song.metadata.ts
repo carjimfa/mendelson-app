@@ -14,6 +14,7 @@ export class SongMetadata {
     year?: number;
     genre?: Array<string>;
     duration?: number;
+    codec?: string;
 
     constructor(values: Partial<SongMetadata>) {
         Object.assign(this, values);

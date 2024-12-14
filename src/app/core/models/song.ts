@@ -19,6 +19,26 @@ export class Song {
     year?: number;
     genre?: string;
     duration?: number;
+    codec?: string;
+
+    get genres(): Array<string> {
+        return this.genre?.split('##') ?? [];
+    }
+
+    get artistsList(): Array<string> {
+        return this.artists?.split('##') ?? [];
+    }
+
+    get durationFormated(): string {
+        if (this.duration) {
+            const minutes = Math.floor(this.duration / 60);
+            const rawSeconds = this.duration - minutes * 60;
+            const seconds = rawSeconds < 10 ? `0${Math.floor(rawSeconds)}` : `${Math.floor(rawSeconds)}`;
+            return `${minutes}:${seconds}`;
+        }
+
+        return '0:00';
+    }
 
     constructor(values: Partial<Song>) {
         Object.assign(this, values);
@@ -35,5 +55,6 @@ export class Song {
         this.year = metadata.year;
         this.genre = metadata.genre?.join("##");
         this.duration = metadata.duration;
+        this.codec = metadata.codec;
     }
 }

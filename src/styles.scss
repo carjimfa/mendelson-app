@@ -2,39 +2,30 @@
 @use "sass:map";
 
 html {
-    @include mat.theme((
-        color: (
-            primary: mat.$rose-palette,
-            tertiary: mat.$red-palette,
-            theme-type: light,
-        ),
-        typography: Roboto,
-        density: 0
-    ));
+    @include mat.theme((color: (primary: mat.$rose-palette,
+                tertiary: mat.$red-palette,
+                theme-type: light,
+            ),
+            typography: Roboto,
+            density: 0));
 
-    @include mat.sidenav-overrides((
-        container-width: 240px,
-        container-divider-color: map.get(mat.$red-palette, 80),
-        container-background-color: map.get(mat.$red-palette, 90)
-    ));
+    @include mat.sidenav-overrides((container-width: 240px,
+            container-divider-color: map.get(mat.$red-palette, 80),
+            container-background-color: map.get(mat.$red-palette, 90)));
 
-    @include mat.toolbar-overrides((
-        container-background-color: map.get(mat.$red-palette, 95),
-    ));
+    @include mat.toolbar-overrides((container-background-color: map.get(mat.$red-palette, 95)));
 }
-// START Component styles
-// Sidenav style
-// END Component styles
 
 html,
 body {
-  height: 100%;
-  min-width: 1024px;
-  min-height: 768px;
+    height: 100%;
+    min-width: 1024px;
+    min-height: 768px;
 }
+
 body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 .mat-drawer-container,
