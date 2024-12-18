@@ -5,6 +5,7 @@ import { concatAll, map, mergeAll, mergeMap, Observable, of, take, tap } from 'r
 import { SongService } from './song.service';
 import { SongStore } from '../features/songs/song.store';
 import { Song } from '../core/models/song';
+import { SongStoreEvent } from '../features/songs/song-store-data';
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +40,7 @@ export class ImportService {
           this.apiService.getSongs()
             .pipe(
               tap((songs) => {
-                this.songStore.setState({ data: { songs } });
+                this.songStore.setState(SongStoreEvent.loadSongs, { songs });
               })
             )
         )
