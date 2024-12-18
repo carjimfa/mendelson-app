@@ -4,6 +4,9 @@ export class PlayerStoreData {
     playlist: Array<Song> = [];
     order: Array<number> = [];
     index = 0;
+    currentTime = 0;
+    onRepeat = true;
+    shuffle = false;
 
     get nowPlaying(): Song | null {
         if (this.playlist?.length && this.order?.length) {
@@ -24,5 +27,10 @@ export enum PlayerStoreEvent {
     resume = 'resume',
     pause = 'pause',
     next = 'next',
-    previous = 'previous'
+    previous = 'previous',
+    timeupdate = 'timeupdate',
+    shuffleOn = 'shuffle-on',
+    shuffleOff = 'shuffle-off',
+    repeatOn = 'repeat-on',
+    repeatOf = 'repeat-off'
 }

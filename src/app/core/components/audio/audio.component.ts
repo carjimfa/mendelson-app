@@ -90,4 +90,10 @@ export class AudioComponent {
   next(): void {
     this.playerStore.next();
   }
+
+  timeupdate($event: Event): void {
+    console.log($event);
+    console.log(`${this.audio.nativeElement.currentTime} of ${this.audio.nativeElement.duration}`);
+    this.playerStore.timeupdate(this.audio.nativeElement.currentTime);
+  }
 }

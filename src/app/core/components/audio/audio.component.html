@@ -1,2 +1,3 @@
-<audio #audio (ended)="next()" type="audio/mp3">
+<audio #audio (ended)="next()" type="audio/mp3"
+    (timeupdate)="timeupdate($event)">
 </audio>
