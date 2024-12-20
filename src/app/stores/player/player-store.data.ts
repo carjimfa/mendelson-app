@@ -32,5 +32,6 @@ export enum PlayerStoreEvent {
     shuffleOn = 'shuffle-on',
     shuffleOff = 'shuffle-off',
     repeatOn = 'repeat-on',
-    repeatOff = 'repeat-off'
+    repeatOff = 'repeat-off',
+    stop = 'stop'
 }

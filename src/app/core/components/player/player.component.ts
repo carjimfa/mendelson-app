@@ -28,9 +28,10 @@ import { environment } from '../../../../environments/environment';
   styleUrl: './player.component.scss'
 })
 export class PlayerComponent {
-  playing$ = signal<boolean>(false);
+  playing = signal<boolean>(false);
   onRepeat = signal<boolean>(false);
   shuffled = signal<boolean>(false);
+  loaded = signal<boolean>(false);
   duration = signal<number>(0);
   currentTime = 0;
   featureFlags = environment.featureFlags;
@@ -40,7 +41,7 @@ export class PlayerComponent {
       .pipe(
         untilDestroyed(this),
         filter((s) => [PlayerStoreEvent.play, PlayerStoreEvent.resume].includes(s.event)),
-        tap(() => this.playing$.set(true))
+        tap(() => this.playing.set(true))
       )
       .subscribe();
 
@@ -48,7 +49,24 @@ export class PlayerComponent {
       .pipe(
         untilDestroyed(this),
         filter((s) => s.event === PlayerStoreEvent.pause),
-        tap(() => this.playing$.set(false))
+        tap(() => this.playing.set(false))
+      )
+      .subscribe();
+
+    this.playerStore.playerData$
+      .pipe(
+        untilDestroyed(this),
+        map((d) => !!d.nowPlaying),
+        distinctUntilChanged(),
+        tap((d) => this.loaded.set(d))
+      )
+      .subscribe();
+
+    this.playerStore.states$
+      .pipe(
+        untilDestroyed(this),
+        filter((s) => s.data.playlist.length === 0),
+        tap(() => this.loaded.set(false))
       )
       .subscribe();
 

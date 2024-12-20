@@ -7,7 +7,7 @@
     (click)="previous()">
     <mat-icon>skip_previous</mat-icon>
 </button>
-@if(!playing$()) {
+@if(!playing()) {
 <button mat-icon-button aria-label="Play"
     (click)="play()">
     <mat-icon>play_arrow</mat-icon>
@@ -27,7 +27,7 @@
     <mat-icon>repeat</mat-icon>
 </button>
 <div class="player__now-playing-label">
-    @if(playing$()){
+    @if(loaded()){
     {{playerData.nowPlaying?.title}} -
     {{playerData.nowPlaying?.albumArtist}}
     } @else {
