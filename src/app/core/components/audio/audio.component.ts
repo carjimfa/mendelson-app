@@ -78,6 +78,17 @@ export class AudioComponent {
         })
       )
       .subscribe();
+
+    this.playerStore.states$
+      .pipe(
+        untilDestroyed(this),
+        filter((s) => s.event === PlayerStoreEvent.stop),
+        tap(() => {
+          this.audio.nativeElement.pause();
+          this.audio.nativeElement.src = "";
+        })
+      )
+      .subscribe();
   }
 
   next(): void {

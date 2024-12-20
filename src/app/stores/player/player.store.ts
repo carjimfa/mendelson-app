@@ -39,14 +39,21 @@ export class PlayerStore extends Store<PlayerStoreEvent, PlayerStoreData> {
 
     next(): void {
         const current = this._states$.getValue().data;
+        let event = PlayerStoreEvent.next;
 
         if (current.index === current.playlist.length - 1 && current.onRepeat) {
             current.index = 0;
+        } else if (current.index === current.playlist.length - 1 && !current.onRepeat) {
+            current.index = 0;
+            current.playlist = [];
+            current.onRepeat = false;
+            current.shuffle = false;
+            event = PlayerStoreEvent.stop;
         } else {
             current.index += 1;
         }
 
-        this.setState(PlayerStoreEvent.next, current);
+        this.setState(event, current);
     }
 
     previous(): void {
