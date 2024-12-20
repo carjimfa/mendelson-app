@@ -2,3 +2,16 @@
     display: flex;
     align-items: center;
 }
+
+.player {
+    &__now-playing-label {
+        font-size: var(--mat-sys-label-medium-size);
+        width: 240px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+button.active {
+    color: var(--mat-sys-primary);
+}

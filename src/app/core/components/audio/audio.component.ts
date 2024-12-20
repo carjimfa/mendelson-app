@@ -47,7 +47,6 @@ export class AudioComponent {
           }
         }),
         tap(([fileContents, data]) => {
-          console.log('setting up the audio')
           const extension = data.nowPlaying?.extension;
           const blob = new Blob([fileContents], { type: `audio/${extension}` });
           this.audio.nativeElement.src = window.URL.createObjectURL(blob);
@@ -62,10 +61,7 @@ export class AudioComponent {
         filter((s) => s.event === PlayerStoreEvent.resume),
         map((s) => new PlayerStoreData(s.data)),
         filter((s) => s && s.nowPlaying?.filePath && this.audio?.nativeElement),
-        tap((isPlaying) => {
-          console.log('isPlaying');
-          console.log(isPlaying);
-          console.log(this.audio?.nativeElement);
+        tap(() => {
           this.audio.nativeElement.play();
         })
       )
@@ -77,10 +73,7 @@ export class AudioComponent {
         filter((s) => s.event === PlayerStoreEvent.pause),
         map((s) => new PlayerStoreData(s.data)),
         filter((s) => s && s.nowPlaying?.filePath && this.audio?.nativeElement),
-        tap((isPlaying) => {
-          console.log('isPlaying');
-          console.log(isPlaying);
-          console.log(this.audio?.nativeElement);
+        tap(() => {
           this.audio.nativeElement.pause();
         })
       )
@@ -91,9 +84,7 @@ export class AudioComponent {
     this.playerStore.next();
   }
 
-  timeupdate($event: Event): void {
-    console.log($event);
-    console.log(`${this.audio.nativeElement.currentTime} of ${this.audio.nativeElement.duration}`);
+  timeupdate(): void {
     this.playerStore.timeupdate(this.audio.nativeElement.currentTime);
   }
 }

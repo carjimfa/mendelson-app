@@ -1,11 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { BehaviorSubject, filter, map, Observable, tap } from 'rxjs';
+import { distinctUntilChanged, filter, map, tap } from 'rxjs';
 import { PlayerStore } from '../../../stores/player/player.store';
-import { PlayerStoreData, PlayerStoreEvent } from '../../../stores/player/player-store.data';
+import { PlayerStoreEvent } from '../../../stores/player/player-store.data';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { MatSliderModule } from '@angular/material/slider';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { environment } from '../../../../environments/environment';
 
 @UntilDestroy()
 @Component({
@@ -13,30 +18,29 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
   imports: [
     MatIconModule,
     CommonModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSliderModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   templateUrl: './player.component.html',
   styleUrl: './player.component.scss'
 })
 export class PlayerComponent {
-  playerData$: Observable<PlayerStoreData>;
-  whatsPlaying$: Observable<string>;
-  private _playing$ = new BehaviorSubject<boolean>(false);
-  playing$: Observable<boolean>;
+  playing$ = signal<boolean>(false);
+  onRepeat = signal<boolean>(false);
+  shuffled = signal<boolean>(false);
+  duration = signal<number>(0);
+  currentTime = 0;
+  featureFlags = environment.featureFlags;
 
-  constructor(private readonly playerStore: PlayerStore) {
-    this.playerData$ = playerStore.states$.pipe(
-      untilDestroyed(this),
-      map((s) => new PlayerStoreData(s.data))
-    );
-
-    this.playing$ = this._playing$.asObservable();
-
+  constructor(public readonly playerStore: PlayerStore) {
     this.playerStore.states$
       .pipe(
         untilDestroyed(this),
         filter((s) => [PlayerStoreEvent.play, PlayerStoreEvent.resume].includes(s.event)),
-        tap(() => this._playing$.next(true))
+        tap(() => this.playing$.set(true))
       )
       .subscribe();
 
@@ -44,7 +48,53 @@ export class PlayerComponent {
       .pipe(
         untilDestroyed(this),
         filter((s) => s.event === PlayerStoreEvent.pause),
-        tap(() => this._playing$.next(false))
+        tap(() => this.playing$.set(false))
+      )
+      .subscribe();
+
+    this.playerStore.states$
+      .pipe(
+        untilDestroyed(this),
+        map((s) => s.data.onRepeat),
+        distinctUntilChanged(),
+        tap((s) => this.onRepeat.set(s))
+      )
+      .subscribe();
+
+    this.playerStore.playerData$
+      .pipe(
+        untilDestroyed(this),
+        map((s) => s.shuffle),
+        distinctUntilChanged(),
+        tap((s) => this.shuffled.set(s))
+      )
+      .subscribe();
+
+    this.playerStore.playerData$
+      .pipe(
+        untilDestroyed(this),
+        map((s) => s.nowPlaying?.duration),
+        distinctUntilChanged(),
+        tap((s) => {
+          if (s) {
+            this.duration.set(Math.floor(s))
+          }
+        })
+      )
+      .subscribe();
+
+    this.playerStore.playerData$
+      .pipe(
+        untilDestroyed(this),
+        map((s) => {
+          return s.currentTime
+        }),
+        distinctUntilChanged(),
+        tap((s) => {
+          if (s) {
+            this.currentTime = Math.floor(s);
+          }
+        })
       )
       .subscribe();
   }
@@ -63,5 +113,13 @@ export class PlayerComponent {
 
   previous(): void {
     this.playerStore.previous();
+  }
+
+  toggleRepeat(): void {
+    this.playerStore.toggleRepeat();
+  }
+
+  toggleShuffle(): void {
+    this.playerStore.toggleShuffle();
   }
 }

@@ -55,7 +55,6 @@ export class SongsComponent {
 
   getSongs(): void {
     this.apiService.getSongs().pipe(take(1)).subscribe((songs) => {
-      console.log(songs);
       this.songStore.setState(
         SongStoreEvent.loadSongs,
         {
@@ -67,13 +66,6 @@ export class SongsComponent {
 
   playSong(song: Song) {
     const songIndex = this.data.findIndex((s) => s.id === song.id);
-
-    const newState: PlayerStoreData = new PlayerStoreData({
-      playlist: this.data,
-      order: this.data.map((e, i) => i),
-      index: songIndex
-    });
-
-    this.playerStore.setState(PlayerStoreEvent.play, newState);
+    this.playerStore.play(this.data, songIndex);
   }
 }

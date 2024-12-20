@@ -18,8 +18,6 @@ export class SongService {
         return from(mm.parseBlob(file))
             .pipe(
                 map((data) => {
-                    console.log('raw data');
-                    console.log(data)
                     return new SongMetadata({
                         album: data.common.album,
                         albumArtist: data.common.albumartist,
@@ -49,9 +47,6 @@ export class SongService {
             .pipe(
                 map(
                     (data) => {
-                        console.log('raw data');
-                        console.log(data)
-
                         return this.mapAudioMetadataToSongMetadata(data);
                     }
                 )
