@@ -1,3 +1,4 @@
+import { CodecExtensions } from "./codec-extensions.map";
 import { SongMetadata } from "./song.metadata";
 
 export class Song {
@@ -38,6 +39,14 @@ export class Song {
         }
 
         return '0:00';
+    }
+
+    get extension(): string {
+        if (this.codec && CodecExtensions.has(this.codec)) {
+            return CodecExtensions.get(this.codec) ?? 'mp3';
+        }
+
+        return 'mp3';
     }
 
     constructor(values: Partial<Song>) {

@@ -18,7 +18,7 @@ export class FileService {
           {
             name: 'Only music files',
             extensions: [
-              'mp3', 'm4a'
+              'mp3', 'flac', 'm4a', 'aac'
             ]
           }
         ]

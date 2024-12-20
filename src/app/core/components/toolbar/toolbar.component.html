@@ -1,27 +1,10 @@
 <mat-toolbar class="toolbar">
     <div class="toolbar__col">
-        <button mat-icon-button aria-label="Example icon-button with menu icon">
-            <mat-icon>shuffle</mat-icon>
-        </button>
-        <button mat-icon-button aria-label="Example icon-button with menu icon">
-            <mat-icon>skip_previous</mat-icon>
-        </button>
-        <button mat-icon-button aria-label="Example icon-button with menu icon"
-            (click)="play()">
-            <mat-icon>play_arrow</mat-icon>
-        </button>
-        <button mat-icon-button aria-label="Example icon-button with menu icon">
-            <mat-icon>skip_next</mat-icon>
-        </button>
-        <button mat-icon-button aria-label="Example icon-button with menu icon">
-            <mat-icon>repeat</mat-icon>
-        </button>
-        <span>Nothing playing</span>
+        <app-player></app-player>
     </div>
     <div class="toolbar__col">
         <div>
-            <audio controls #audio type="audio/mp3">
-            </audio>
+            <app-audio></app-audio>
         </div>
         <button mat-icon-button class="favorite-icon"
             aria-label="Example icon-button with heart icon">
@@ -32,5 +15,4 @@
             <mat-icon>share</mat-icon>
         </button>
     </div>
-
 </mat-toolbar>

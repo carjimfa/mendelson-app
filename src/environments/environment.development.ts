@@ -1,4 +1,7 @@
 export const environment = {
     production: false,
-    useMocks: true
+    useMocks: true,
+    featureFlags: {
+        playSlider: false
+    }
 };

@@ -8,10 +8,10 @@ import { Song } from '../../core/models/song';
 import { map, take, tap } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
 import { PlayerStore } from '../../stores/player/player.store';
-import { StoreState } from '../../stores/store';
-import { PlayerStoreData } from '../../stores/player/player-store.data';
+import { PlayerStoreData, PlayerStoreEvent } from '../../stores/player/player-store.data';
 import { SongStore } from './song.store';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
+import { SongStoreEvent } from './song-store-data';
 
 @UntilDestroy()
 @Component({
@@ -55,22 +55,17 @@ export class SongsComponent {
 
   getSongs(): void {
     this.apiService.getSongs().pipe(take(1)).subscribe((songs) => {
-      console.log(songs);
-      this.songStore.setState({
-        data: {
+      this.songStore.setState(
+        SongStoreEvent.loadSongs,
+        {
           songs
         }
-      })
+      );
     });
   }
 
   playSong(song: Song) {
-    const newState: StoreState<PlayerStoreData> = {
-      data: {
-        song
-      }
-    };
-
-    this.playerStore.setState(newState);
+    const songIndex = this.data.findIndex((s) => s.id === song.id);
+    this.playerStore.play(this.data, songIndex);
   }
 }

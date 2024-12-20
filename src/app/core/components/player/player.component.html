@@ -1,0 +1,46 @@
+@if(playerStore.playerData$| async; as playerData) {
+<button mat-icon-button aria-label="Shuffle" (click)="toggleShuffle()"
+    [class.active]="shuffled()">
+    <mat-icon>shuffle</mat-icon>
+</button>
+<button mat-icon-button aria-label="Previous"
+    (click)="previous()">
+    <mat-icon>skip_previous</mat-icon>
+</button>
+@if(!playing()) {
+<button mat-icon-button aria-label="Play"
+    (click)="play()">
+    <mat-icon>play_arrow</mat-icon>
+</button>
+} @else {
+<button mat-icon-button aria-label="Pause"
+    (click)="pause()">
+    <mat-icon>pause</mat-icon>
+</button>
+}
+<button mat-icon-button aria-label="Next"
+    (click)="next()">
+    <mat-icon>skip_next</mat-icon>
+</button>
+<button mat-icon-button aria-label="Repeat" [class.active]="onRepeat()"
+    (click)="toggleRepeat()">
+    <mat-icon>repeat</mat-icon>
+</button>
+<div class="player__now-playing-label">
+    @if(loaded()){
+    {{playerData.nowPlaying?.title}} -
+    {{playerData.nowPlaying?.albumArtist}}
+    } @else {
+    Nothing playing right now...
+    }
+</div>
+@if(featureFlags.playSlider){
+<div class="player__slider">
+    {{currentTime}}
+    <mat-slider [max]="duration()">
+        <input matSliderThumb [(ngModel)]="currentTime" #slider>
+    </mat-slider>
+    {{duration()}}
+</div>
+}
+}
