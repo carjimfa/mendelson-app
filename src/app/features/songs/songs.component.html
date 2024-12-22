@@ -31,7 +31,9 @@
 
         <tr mat-header-row
             *matHeaderRowDef="displayedColumns; sticky: true;"></tr>
-        <tr mat-row (click)="playSong(row)"
-            *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr mat-row (click)="select(row)"
+            *matRowDef="let row; columns: displayedColumns;"
+            [class.selected]="selected() === row.id"
+            [class.playing]="playing() === row.id"></tr>
     </table>
 </div>
