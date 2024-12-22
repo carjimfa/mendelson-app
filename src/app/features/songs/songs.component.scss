@@ -5,14 +5,19 @@
     height: calc(100vh - 64px);
     overflow: auto;
 
-    tr.selected {
+    tr.selected,
+    tr.playing.selected {
         background-color: var(--mat-sys-primary);
         color: var(--mat-sys-on-primary);
-        font-weight: 600;
+    }
+
+    tr,
+    tr td {
+        background: transparent;
     }
 
     tr.playing {
-        font-weight: 600;
+        color: var(--mat-sys-primary);
     }
 
     .mat-mdc-header-cell {

@@ -33,7 +33,7 @@
             *matHeaderRowDef="displayedColumns; sticky: true;"></tr>
         <tr mat-row (click)="select(row)"
             *matRowDef="let row; columns: displayedColumns;"
-            [class.selected]="selected() === row.id"
-            [class.playing]="playing() === row.id"></tr>
+            [class.selected]="isSelected(row.id)"
+            [class.playing]="isPlaying(row.id)"></tr>
     </table>
 </div>

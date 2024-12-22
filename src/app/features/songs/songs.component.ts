@@ -2,7 +2,7 @@ import { Component, signal } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { ApiServicesFactory } from '../../services/api-services.factory';
 import { MatTableModule } from '@angular/material/table';
-import { MatSortModule } from '@angular/material/sort';
+import { MatSortModule, Sort } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { Song } from '../../core/models/song';
 import { filter, map, take, tap, timer } from 'rxjs';
@@ -11,11 +11,13 @@ import { PlayerStore } from '../../stores/player/player.store';
 import { SongStore } from './song.store';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { SongStoreEvent } from './song-store-data';
+import { CommonModule } from '@angular/common';
 
 @UntilDestroy()
 @Component({
   selector: 'app-songs',
   imports: [
+    CommonModule,
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
@@ -36,6 +38,14 @@ export class SongsComponent {
   selected = signal<number | undefined>(undefined);
   selectedOnDoubleClick = false;
   playing = signal<number | undefined>(undefined);
+
+  isPlaying(id: number): boolean {
+    return this.playing() === id;
+  }
+
+  isSelected(id: number): boolean {
+    return this.selected() === id;
+  }
 
   constructor(
     private readonly apiService: ApiService,
