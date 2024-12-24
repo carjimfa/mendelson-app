@@ -2,10 +2,10 @@ import { Component, signal } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { ApiServicesFactory } from '../../services/api-services.factory';
 import { MatTableModule } from '@angular/material/table';
-import { MatSortModule, Sort } from '@angular/material/sort';
+import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { Song } from '../../core/models/song';
-import { filter, map, take, tap, timer } from 'rxjs';
+import { map, take, tap, timer } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
 import { PlayerStore } from '../../stores/player/player.store';
 import { SongStore } from './song.store';
@@ -92,7 +92,7 @@ export class SongsComponent {
   }
 
   select(song: Song): void {
-    const clearSelection$ = timer(200).pipe(take(1), tap(() => this.selectedOnDoubleClick = false));
+    const clearSelection$ = timer(500).pipe(take(1), tap(() => this.selectedOnDoubleClick = false));
 
     if (this.selected() === song.id && this.selectedOnDoubleClick) {
       this.playSong(song);
