@@ -1,4 +1,31 @@
+@use '@angular/material' as mat;
+@use "sass:map";
+
 .table-container {
     height: calc(100vh - 64px);
     overflow: auto;
+
+    tr.selected,
+    tr.playing.selected {
+        background-color: var(--mat-sys-primary);
+        color: var(--mat-sys-on-primary);
+    }
+
+    tr,
+    tr td {
+        background: transparent;
+    }
+
+    tr.playing {
+        color: var(--mat-sys-primary);
+    }
+
+    .mat-mdc-header-cell {
+        width: 25%;
+    }
+
+    .mat-mdc-header-row,
+    .mat-mdc-row {
+        height: 32px;
+    }
 }
