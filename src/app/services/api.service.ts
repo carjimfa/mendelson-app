@@ -71,31 +71,35 @@ export class ApiService {
             ]
         );
 
+        const inputValues = [
+            song.filePath,
+            song.addedOn,
+            song.modifiedOn,
+            song.timesPlayed,
+            song.rating,
+            song.isFavorite,
+            song.album,
+            song.albumArtist,
+            song.artist,
+            song.artists,
+            song.title,
+            song.trackOf,
+            song.trackNo,
+            song.year,
+            song.genre,
+            song.duration,
+            song.codec
+        ];
+
+        console.log(inputValues)
+
         return db$.pipe(
             take(1),
             mergeMap((db) => {
                 return from(
                     db.execute(
                         queryBuilder.build(),
-                        [
-                            song.filePath,
-                            song.addedOn,
-                            song.modifiedOn,
-                            song.timesPlayed,
-                            song.rating,
-                            song.isFavorite,
-                            song.album,
-                            song.albumArtist,
-                            song.artist,
-                            song.artists,
-                            song.title,
-                            song.trackOf,
-                            song.trackNo,
-                            song.year,
-                            song.genre,
-                            song.duration,
-                            song.codec
-                        ]
+                        inputValues
                     )
                 );
             })
