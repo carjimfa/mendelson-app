@@ -25,11 +25,11 @@ export class DbQueryBuilder {
         return this;
     }
 
-    where(parameter: string, operator: string, value: unknown, ruleOperator: "OR" | "AND" = "AND"): DbQueryBuilder {
+    where(parameter: string, operator: string, value: string | number | boolean | Date | null | undefined, ruleOperator: "OR" | "AND" = "AND"): DbQueryBuilder {
         if (!this.conditions.length) {
-            this.conditions.push(`${parameter} ${operator} \'${value}\'`);
+            this.conditions.push(`${parameter} ${operator} \'${this.escapeInput(value)}\'`);
         } else {
-            this.conditions.push(`${ruleOperator} ${parameter} ${operator} \'${value}\'`);
+            this.conditions.push(`${ruleOperator} ${parameter} ${operator} \'${this.escapeInput(value)}\'`);
         }
 
         return this;
@@ -44,11 +44,21 @@ export class DbQueryBuilder {
             this.query += ` GROUP BY ${this.groupByColumn}`;
         }
 
+        console.log(this.query);
         return this.query;
     }
 
     groupBy(column: string): DbQueryBuilder {
         this.groupByColumn = column;
         return this;
+    }
+
+    escapeInput(value: string | number | boolean | Date | null | undefined): string | number | boolean | Date | null | undefined {
+        switch (typeof value) {
+            case "string":
+                return value.replace("'", "''");
+            default:
+                return value;
+        }
     }
 }

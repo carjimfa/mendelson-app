@@ -30,4 +30,13 @@ export class ApiMockService implements ApiService {
     songExists(song: Song): Observable<boolean> {
         return of();
     }
+
+    escapeInput(value: string | number | boolean | Date | null | undefined): string | number | boolean | Date | null | undefined {
+        switch (typeof value) {
+            case "string":
+                return value.replace("'", "\\'").replace('"', '\\"').replace('\\', '\\\\');
+            default:
+                return value;
+        }
+    }
 }

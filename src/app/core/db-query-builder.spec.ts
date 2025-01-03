@@ -76,5 +76,10 @@ describe('DbQueryBuilder', () => {
 
         builder.build();
         expect(builder.query).toBe('SELECT username, MAX(email) as email FROM users GROUP BY username');
-    })
+    });
+
+    it('commas handling', () => {
+        const escaped = service.escapeInput('Where It\'$ At');
+        expect(escaped).toBe('Where It\'\'$ At');
+    });
 });
